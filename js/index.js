@@ -22,38 +22,25 @@ function submitForm() {
           userReposBtn.innerText = "Click to view user repos";
           userReposBtn.classList.add("btn");
           let userRepoUrl = person.repos_url;
-          console.log(userRepoUrl);
-          let addToy = false;
+
+          personList.appendChild(userName);
+          personList.appendChild(userReposBtn);
+
+          personList.appendChild(userGitUrl);
+          personList.appendChild(userAvatar);
+
+          usersContainer.appendChild(personList);
           userReposBtn.addEventListener("click", (e) => {
-            let reposContainer = document.getElementById("repos-list");
-            addToy = !addToy;
-            if (addToy) {
-              reposContainer.style.display = "block";
-            } else {
-              reposContainer.style.display = "none";
-            }
-            console.log(userRepoUrl);
             fetch(userRepoUrl)
               .then((resp) => resp.json())
               .then((data) => {
                 for (let repo of data) {
                   let repoSection = document.createElement("li");
-                  reposContainer.appendChild(repoSection);
-                  for (let obj in repo) {
-                    let repoKeys = document.createElement("li");
-                    repoKeys.innerText = repo[obj];
-                    repoSection.appendChild(repoKeys);
-                  }
+                  personList.appendChild(repoSection);
+                  repoSection.innerText = repo.name;
                 }
               });
           });
-
-          personList.appendChild(userName);
-          personList.appendChild(userGitUrl);
-          personList.appendChild(userAvatar);
-          personList.appendChild(userReposBtn);
-
-          usersContainer.appendChild(personList);
         }
       });
   });
