@@ -22,10 +22,8 @@ function submitForm() {
           userReposBtn.innerText = "Click to view user repos";
           userReposBtn.classList.add("btn");
           let userRepoUrl = person.repos_url;
-
           personList.appendChild(userName);
           personList.appendChild(userReposBtn);
-
           personList.appendChild(userGitUrl);
           personList.appendChild(userAvatar);
 
